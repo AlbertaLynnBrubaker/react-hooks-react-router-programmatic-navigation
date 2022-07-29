@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
-function Login({ setIsLoggedIn }) {
+function Login({isLoggedIn, setIsLoggedIn }) {
   const history = useHistory();
   const [formData, setFormData] = useState({
     username: "",
@@ -25,22 +25,26 @@ function Login({ setIsLoggedIn }) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h1>Login</h1>
-      <input
-        type="text"
-        name="username"
-        value={formData.username}
-        onChange={handleChange}
-      />
-      <input
-        type="password"
-        name="password"
-        value={formData.password}
-        onChange={handleChange}
-      />
-      <button type="submit">Login</button>
-    </form>
+    <>
+      {isLoggedIn ? <h1>You are already logged in!</h1> :
+        <form onSubmit={handleSubmit}>
+          <h1>Login</h1>
+          <input
+            type="text"
+            name="username"
+            value={formData.username}
+            onChange={handleChange}
+          />
+          <input
+            type="password"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+          />
+          <button type="submit">Login</button>
+        </form>
+      }
+    </>
   );
 }
 
